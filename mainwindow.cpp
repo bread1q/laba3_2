@@ -33,53 +33,50 @@ MainWindow::~MainWindow()
 void MainWindow::onSpinBoxAChanged(int value)
 {
     model.setA(value);
-    onModelChanged();
 }
 
 void MainWindow::onSpinBoxBChanged(int value)
 {
     model.setB(value);
-    onModelChanged();
+    int newValue = model.getB();
+
+    if (newValue != value) {
+        ui->spinBox_B->blockSignals(true);
+        ui->spinBox_B->setValue(newValue);
+        ui->spinBox_B->blockSignals(false);
+    }
 }
 
 void MainWindow::onSpinBoxCChanged(int value)
 {
     model.setC(value);
-    onModelChanged();
 }
 
 void MainWindow::onModelChanged()
 {
-    ui->spinBox_A->blockSignals(true);
-    ui->spinBox_B->blockSignals(true);
-    ui->spinBox_C->blockSignals(true);
-
-    ui->horizontalSlider_A->blockSignals(true);
-    ui->horizontalSlider_B->blockSignals(true);
-    ui->horizontalSlider_C->blockSignals(true);
-
-    ui->spinBox_A->setValue(model.getA());
-    ui->spinBox_B->setValue(model.getB());
-    ui->spinBox_C->setValue(model.getC());
-
-    ui->horizontalSlider_A->setValue(model.getA());
-    ui->horizontalSlider_B->setValue(model.getB());
-    ui->horizontalSlider_C->setValue(model.getC());
-
-    ui->horizontalSlider_B->setMinimum(model.getMinB());
-    ui->horizontalSlider_B->setMaximum(model.getMaxB());
 
     ui->lineEdit_A->setText(QString::number(model.getA()));
     ui->lineEdit_B->setText(QString::number(model.getB()));
     ui->lineEdit_C->setText(QString::number(model.getC()));
 
+    ui->horizontalSlider_A->setValue(model.getA());
+    ui->horizontalSlider_B->setValue(model.getB());
+    ui->horizontalSlider_C->setValue(model.getC());
+
+    ui->spinBox_A->blockSignals(true);
+    ui->spinBox_B->blockSignals(true);
+    ui->spinBox_C->blockSignals(true);
+
+    ui->spinBox_A->setValue(model.getA());
+    ui->spinBox_B->setValue(model.getB());
+    ui->spinBox_C->setValue(model.getC());
+
     ui->spinBox_A->blockSignals(false);
     ui->spinBox_B->blockSignals(false);
     ui->spinBox_C->blockSignals(false);
 
-    ui->horizontalSlider_A->blockSignals(false);
-    ui->horizontalSlider_B->blockSignals(false);
-    ui->horizontalSlider_C->blockSignals(false);
+    ui->horizontalSlider_B->setMinimum(model.getMinB());
+    ui->horizontalSlider_B->setMaximum(model.getMaxB());
 }
 
 void MainWindow::onSliderAChanged(int value)
