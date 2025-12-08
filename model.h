@@ -27,6 +27,9 @@ public:
     int getMinB() const;
     int getMaxB() const;
 
+    void saveToSettings();
+    void loadFromSettings();
+
 signals:
     void valuesChanged();
 };

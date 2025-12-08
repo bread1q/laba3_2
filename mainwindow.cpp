@@ -11,7 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->spinBox_A, SIGNAL(valueChanged(int)), this, SLOT(onSpinBoxAChanged(int)));
     connect(ui->spinBox_B, SIGNAL(valueChanged(int)), this, SLOT(onSpinBoxBChanged(int)));
     connect(ui->spinBox_C, SIGNAL(valueChanged(int)), this, SLOT(onSpinBoxCChanged(int)));
-    connect(&model, SIGNAL(valuesChanged()), this, SLOT(onModelChanged()));
 
     connect(ui->horizontalSlider_A, SIGNAL(valueChanged(int)), this, SLOT(onSliderAChanged(int)));
     connect(ui->horizontalSlider_B, SIGNAL(valueChanged(int)), this, SLOT(onSliderBChanged(int)));
@@ -20,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->lineEdit_A, &QLineEdit::editingFinished, [this]() { onLineEditAChanged(); });
     connect(ui->lineEdit_B, &QLineEdit::editingFinished, [this]() { onLineEditBChanged(); });
     connect(ui->lineEdit_C, &QLineEdit::editingFinished, [this]() { onLineEditCChanged(); });
+
+    connect(&model, SIGNAL(valuesChanged()), this, SLOT(onModelChanged()));
+
+    onModelChanged();
 }
 
 MainWindow::~MainWindow()
