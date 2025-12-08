@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "model.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +18,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void onSpinBoxAChanged(int value);
+    void onSpinBoxBChanged(int value);
+    void onSpinBoxCChanged(int value);
+    void onModelChanged();
+
 private:
     Ui::MainWindow *ui;
+    Model model;
 };
 #endif // MAINWINDOW_H
