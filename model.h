@@ -24,6 +24,9 @@ public:
     void setB(int value);
     void setC(int value);
 
+    int getMinB() const;
+    int getMaxB() const;
+
 signals:
     void valuesChanged();
 };

@@ -23,6 +23,9 @@ private slots:
     void onSpinBoxBChanged(int value);
     void onSpinBoxCChanged(int value);
     void onModelChanged();
+    void onSliderAChanged(int value);
+    void onSliderBChanged(int value);
+    void onSliderCChanged(int value);
 
 private:
     Ui::MainWindow *ui;

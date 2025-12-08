@@ -84,3 +84,13 @@ void Model::setC(int value)
 
     qDebug() << "Model: A = " << a_ << "B = " << b_ << "C = " << c_;
 }
+
+int Model::getMinB() const
+{
+    return a_;
+}
+
+int Model::getMaxB() const
+{
+    return c_;
+}
