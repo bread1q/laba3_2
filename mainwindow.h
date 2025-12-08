@@ -26,6 +26,9 @@ private slots:
     void onSliderAChanged(int value);
     void onSliderBChanged(int value);
     void onSliderCChanged(int value);
+    void onLineEditAChanged();
+    void onLineEditBChanged();
+    void onLineEditCChanged();
 
 private:
     Ui::MainWindow *ui;

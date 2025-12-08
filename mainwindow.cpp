@@ -16,6 +16,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->horizontalSlider_A, SIGNAL(valueChanged(int)), this, SLOT(onSliderAChanged(int)));
     connect(ui->horizontalSlider_B, SIGNAL(valueChanged(int)), this, SLOT(onSliderBChanged(int)));
     connect(ui->horizontalSlider_C, SIGNAL(valueChanged(int)), this, SLOT(onSliderCChanged(int)));
+
+    connect(ui->lineEdit_A, &QLineEdit::editingFinished, [this]() { onLineEditAChanged(); });
+    connect(ui->lineEdit_B, &QLineEdit::editingFinished, [this]() { onLineEditBChanged(); });
+    connect(ui->lineEdit_C, &QLineEdit::editingFinished, [this]() { onLineEditCChanged(); });
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +66,10 @@ void MainWindow::onModelChanged()
     ui->horizontalSlider_B->setMinimum(model.getMinB());
     ui->horizontalSlider_B->setMaximum(model.getMaxB());
 
+    ui->lineEdit_A->setText(QString::number(model.getA()));
+    ui->lineEdit_B->setText(QString::number(model.getB()));
+    ui->lineEdit_C->setText(QString::number(model.getC()));
+
     ui->spinBox_A->blockSignals(false);
     ui->spinBox_B->blockSignals(false);
     ui->spinBox_C->blockSignals(false);
@@ -84,4 +92,41 @@ void MainWindow::onSliderBChanged(int value)
 void MainWindow::onSliderCChanged(int value)
 {
     model.setC(value);
+}
+
+void MainWindow::onLineEditAChanged()
+{
+    QString text = ui->lineEdit_A->text();
+    bool ok;
+    int value = text.toInt(&ok);
+
+    if (ok) model.setA(value);
+    else ui->lineEdit_A->setText(QString::number(model.getA()));
+}
+
+void MainWindow::onLineEditBChanged()
+{
+    QString text = ui->lineEdit_B->text();
+    bool ok;
+    int value = text.toInt(&ok);
+
+    if (ok) {
+        model.setB(value);
+
+        if (model.getB() != value) {
+            ui->lineEdit_B->setText(QString::number(model.getB()));
+        }
+    } else {
+        ui->lineEdit_B->setText(QString::number(model.getB()));
+    }
+}
+
+void MainWindow::onLineEditCChanged()
+{
+    QString text = ui->lineEdit_C->text();
+    bool ok;
+    int value = text.toInt(&ok);
+
+    if (ok) model.setC(value);
+    else ui->lineEdit_C->setText(QString::number(model.getC()));
 }
